@@ -9,6 +9,7 @@ public class HotelOwner {
     @Id
     private Object id;
 
+    private String name;
     private String email;
     private String fullname;
 }

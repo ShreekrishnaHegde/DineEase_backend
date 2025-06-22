@@ -10,7 +10,7 @@ public class HotelOwnerService {
     @Autowired
     private HotelOwnerRepository hotelOwnerRepository;
 
-    void saveHotelOwner(HotelOwner hotelOwner){
+    public void saveHotelOwner(HotelOwner hotelOwner){
         hotelOwnerRepository.save(hotelOwner);
     }
 }

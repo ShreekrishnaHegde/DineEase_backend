@@ -9,6 +9,6 @@ public class Doctor {
 
     @GetMapping("/health-check")
     public String function(){
-        return "Hello World";
+        return "Hello World Good Evening";
     }
 }

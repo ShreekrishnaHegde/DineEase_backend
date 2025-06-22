@@ -11,6 +11,6 @@ public class Doctor {
 
     @GetMapping("/health-check")
     public Map<String,String> function(){
-        return Map.of("meessage","Hello World Good Evening");
+        return Map.of("title","Hello World Good Evening");
     }
 }

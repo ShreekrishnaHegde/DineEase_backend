@@ -4,7 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "customer")
+@Document(collection = "customer")
 public class Customer {
     @Id
     private ObjectId id;

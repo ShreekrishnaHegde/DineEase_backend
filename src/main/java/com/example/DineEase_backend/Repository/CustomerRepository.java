@@ -4,6 +4,6 @@ import com.example.DineEase_backend.Entity.Customer;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface CustomerReposity extends MongoRepository<Customer, ObjectId> {
+public interface CustomerRepository extends MongoRepository<Customer, ObjectId> {
 
 }

@@ -14,8 +14,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 public class Customer {
     @Id
+    private ObjectId mongoId;
+
     private String supaId;
-    private String name;
     private String email;
     private String fullname;
     private String role;

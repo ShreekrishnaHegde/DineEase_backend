@@ -14,9 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 public class HotelOwner {
     @Id
-    private String supaId;
+    private ObjectId mongoId;
 
-    private String name;
+    private String supaId;
     private String email;
     private String fullname;
+    private String role;
 }

@@ -4,5 +4,5 @@ import com.example.DineEase_backend.Entity.HotelOwner;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface HotelOwnerRepository extends MongoRepository<HotelOwner, String> {
+public interface HotelOwnerRepository extends MongoRepository<HotelOwner, ObjectId> {
 }

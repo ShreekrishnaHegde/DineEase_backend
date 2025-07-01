@@ -20,4 +20,5 @@ public class HotelOwner {
     private String email;
     private String fullname;
     private String role;
+    private Menu menu=new Menu();
 }

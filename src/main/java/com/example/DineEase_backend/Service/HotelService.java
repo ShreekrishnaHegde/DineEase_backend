@@ -42,6 +42,15 @@ public class HotelService {
         category.getItems().add(item);
         return hotelRepository.save(hotel);
     }
+    public Hotel deleteItem(ObjectId hotelId,String categoryId,String itemId){
+        Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not found"));
+        Category category=hotel.getMenu().getCategories().stream()
+                .filter(cat -> cat.getCategoryId().equals(categoryId)).findFirst().orElseThrow(()->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,"Category Not Found"));
+        category.getItems().removeIf(item -> item.getItemId().equals(itemId));
+        return hotelRepository.save(hotel);
+    }
     public List<Item> getAllItems(ObjectId hotelId){
         Hotel hotel=hotelRepository.findById(hotelId).orElseThrow();
         List<Item> allItems=new ArrayList<>();

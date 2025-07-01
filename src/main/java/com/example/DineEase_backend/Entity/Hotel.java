@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class HotelOwner {
+public class Hotel {
     @Id
     private ObjectId mongoId;
 
@@ -20,4 +20,5 @@ public class HotelOwner {
     private String email;
     private String fullname;
     private String role;
+    private Menu menu=new Menu();
 }

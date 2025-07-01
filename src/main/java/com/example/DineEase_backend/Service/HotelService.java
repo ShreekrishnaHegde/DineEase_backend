@@ -1,0 +1,64 @@
+package com.example.DineEase_backend.Service;
+
+import com.example.DineEase_backend.Entity.Category;
+import com.example.DineEase_backend.Entity.Hotel;
+import com.example.DineEase_backend.Entity.Item;
+import com.example.DineEase_backend.Repository.HotelRepository;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class HotelService {
+    @Autowired
+    private HotelRepository hotelRepository;
+
+    public void saveHotelOwner(Hotel hotel){
+        hotelRepository.save(hotel);
+    }
+    public Hotel addCategory(ObjectId hotelId, Category category){
+        Hotel hotel= hotelRepository.findById(hotelId).orElseThrow(()->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not Found"));
+        hotel.getMenu().getCategories().add(category);
+        return hotelRepository.save(hotel);
+    }
+    public Hotel deleteCategory(ObjectId hotelId,String categoryId){
+        Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()
+                 ->new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not Found"));
+        hotel.getMenu().getCategories().removeIf(cat -> cat.getCategoryId().equals(categoryId));
+        return hotelRepository.save(hotel);
+    }
+    public Hotel addItem(ObjectId hotelId, String categoryId, Item item){
+        Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not Found"));
+        Category category=hotel.getMenu().getCategories().stream()
+                .filter(c -> c.getCategoryId().equals(categoryId)).findFirst().orElseThrow(()->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,"Category Not Found"));
+        category.getItems().add(item);
+        return hotelRepository.save(hotel);
+    }
+    public Hotel deleteItem(ObjectId hotelId,String categoryId,String itemId){
+        Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()->
+                new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not found"));
+        Category category=hotel.getMenu().getCategories().stream()
+                .filter(cat -> cat.getCategoryId().equals(categoryId)).findFirst().orElseThrow(()->
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,"Category Not Found"));
+        category.getItems().removeIf(item -> item.getItemId().equals(itemId));
+        return hotelRepository.save(hotel);
+    }
+    public List<Item> getAllItems(ObjectId hotelId){
+        Hotel hotel=hotelRepository.findById(hotelId).orElseThrow();
+        List<Item> allItems=new ArrayList<>();
+        for (Category category: hotel.getMenu().getCategories()){
+            allItems.addAll(category.getItems());
+        }
+        return allItems;
+    }
+
+
+}

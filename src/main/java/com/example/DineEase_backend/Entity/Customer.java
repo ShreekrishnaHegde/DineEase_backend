@@ -1,6 +1,5 @@
 package com.example.DineEase_backend.Entity;
 
-import jdk.jfr.DataAmount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

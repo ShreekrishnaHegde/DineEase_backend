@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/hotel")
@@ -33,6 +35,11 @@ public class HotelController {
     ResponseEntity<?> addItem(@PathVariable ObjectId hotelId,@PathVariable String categoryId,@RequestBody Item item){
         hotelService.addItem(hotelId,categoryId,item);
         return ResponseEntity.status(HttpStatus.CREATED).body("added Item");
+    }
+    @GetMapping("/{hotelId}/menu/items")
+    public ResponseEntity<List<Item>> getAllItems(@PathVariable ObjectId hotelId){
+        List<Item> items=hotelService.getAllItems(hotelId);
+        return ResponseEntity.ok(items);
     }
 
 }

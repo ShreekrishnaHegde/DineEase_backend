@@ -11,10 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class HotelService {
@@ -24,16 +20,23 @@ public class HotelService {
     public void saveHotelOwner(Hotel hotel){
         hotelRepository.save(hotel);
     }
+    //To find the hotel id via email
     public ObjectId findIdByEmail(String email){
         return hotelRepository.findByEmail(email)
                 .map(Hotel::getMongoId)
                 .orElseThrow(() -> new RuntimeException("Hotel not found with email: " + email));
     }
-    public Hotel addCategory(ObjectId hotelId, Category category){
+    //To retrieve the menu items
+    public Menu getMenu(ObjectId hotelId){
+        Hotel hotel=hotelRepository.findById(hotelId).orElseThrow();
+        return  hotel.getMenu();
+    }
+    //To add a category
+    public void addCategory(ObjectId hotelId, Category category){
         Hotel hotel= hotelRepository.findById(hotelId).orElseThrow(()->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not Found"));
         hotel.getMenu().getCategories().add(category);
-        return hotelRepository.save(hotel);
+        hotelRepository.save(hotel);
     }
     public Hotel deleteCategory(ObjectId hotelId,String categoryId){
         Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()
@@ -59,9 +62,5 @@ public class HotelService {
         category.getItems().removeIf(item -> item.getItemId().equals(itemId));
         return hotelRepository.save(hotel);
     }
-    public Menu getMenu(ObjectId hotelId){
-        Hotel hotel=hotelRepository.findById(hotelId).orElseThrow();
-        return  hotel.getMenu();
 
-    }
 }

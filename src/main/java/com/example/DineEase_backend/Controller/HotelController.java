@@ -50,10 +50,11 @@ public class HotelController {
         return ResponseEntity.ok("Deleted Category");
     }
 
-    @PostMapping("/{username}/menu/categories/{categoryId}/items")
-    ResponseEntity<?> addItem(@PathVariable String username,@PathVariable String categoryId,@RequestBody Item item){
+    //To add an item
+    @PostMapping("/{username}/menu/category/{categoryId}/item")
+    ResponseEntity<?> addItem(@PathVariable String username,@PathVariable String categoryId,@RequestBody List<Item> items){
         ObjectId hotelId=hotelService.findIdByEmail(username);
-        hotelService.addItem(hotelId,categoryId,item);
+        hotelService.addItems(hotelId,categoryId,items);
         return ResponseEntity.status(HttpStatus.CREATED).body("added Item");
     }
 

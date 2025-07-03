@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 
 @Service
 public class HotelService {
@@ -44,13 +46,13 @@ public class HotelService {
         hotel.getMenu().getCategories().removeIf(cat -> cat.getCategoryId().equals(categoryId));
         hotelRepository.save(hotel);
     }
-    public Hotel addItem(ObjectId hotelId, String categoryId, Item item){
+    public Hotel addItems(ObjectId hotelId, String categoryId, List<Item> items){
         Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not Found"));
         Category category=hotel.getMenu().getCategories().stream()
                 .filter(c -> c.getCategoryId().equals(categoryId)).findFirst().orElseThrow(()->
                         new ResponseStatusException(HttpStatus.NOT_FOUND,"Category Not Found"));
-        category.getItems().add(item);
+        category.getItems().addAll(items);
         return hotelRepository.save(hotel);
     }
     public Hotel deleteItem(ObjectId hotelId,String categoryId,String itemId){

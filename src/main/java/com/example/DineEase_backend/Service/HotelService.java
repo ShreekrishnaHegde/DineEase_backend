@@ -3,6 +3,7 @@ package com.example.DineEase_backend.Service;
 import com.example.DineEase_backend.Entity.Category;
 import com.example.DineEase_backend.Entity.Hotel;
 import com.example.DineEase_backend.Entity.Item;
+import com.example.DineEase_backend.Entity.Menu;
 import com.example.DineEase_backend.Repository.HotelRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class HotelService {
@@ -56,12 +59,9 @@ public class HotelService {
         category.getItems().removeIf(item -> item.getItemId().equals(itemId));
         return hotelRepository.save(hotel);
     }
-    public List<Item> getAllItems(ObjectId hotelId){
+    public Menu getMenu(ObjectId hotelId){
         Hotel hotel=hotelRepository.findById(hotelId).orElseThrow();
-        List<Item> allItems=new ArrayList<>();
-        for (Category category: hotel.getMenu().getCategories()){
-            allItems.addAll(category.getItems());
-        }
-        return allItems;
+        return  hotel.getMenu();
+
     }
 }

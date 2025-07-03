@@ -4,6 +4,7 @@ package com.example.DineEase_backend.Controller;
 import com.example.DineEase_backend.Entity.Category;
 import com.example.DineEase_backend.Entity.Hotel;
 import com.example.DineEase_backend.Entity.Item;
+import com.example.DineEase_backend.Entity.Menu;
 import com.example.DineEase_backend.Service.HotelService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,10 @@ public class HotelController {
         return ResponseEntity.status(HttpStatus.CREATED).body("added Item");
     }
     @GetMapping("/{username}/menu/items")
-    public ResponseEntity<List<Item>> getAllItems(@PathVariable String username){
+    public ResponseEntity<List<Category>> getMenu(@PathVariable String username){
         ObjectId hotelId=hotelService.findIdByEmail(username);
-        List<Item> items=hotelService.getAllItems(hotelId);
-        return ResponseEntity.ok(items);
+        Menu menu=hotelService.getMenu(hotelId);
+        return  ResponseEntity.ok(menu.getCategories());
     }
 
 }

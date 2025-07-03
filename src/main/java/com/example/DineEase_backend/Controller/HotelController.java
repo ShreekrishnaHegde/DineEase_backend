@@ -57,6 +57,13 @@ public class HotelController {
         hotelService.addItems(hotelId,categoryId,items);
         return ResponseEntity.status(HttpStatus.CREATED).body("added Item");
     }
+    //To delete an item
+    @DeleteMapping("/{username}/menu/category/{categoryId}/item/{itemId}")
+    ResponseEntity<?> deleteItem(@PathVariable String username,@PathVariable String categoryId,@PathVariable String itemId){
+        ObjectId hotelId=hotelService.findIdByEmail(username);
+        hotelService.deleteItem(hotelId,categoryId,itemId);
+        return ResponseEntity.ok("Deleted an item");
+    }
 
 
 }

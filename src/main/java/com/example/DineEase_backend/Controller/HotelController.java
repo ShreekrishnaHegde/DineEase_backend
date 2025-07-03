@@ -26,18 +26,21 @@ public class HotelController {
         hotelService.saveHotelOwner(hotel);
         return ResponseEntity.ok("OK");
     }
-    @PostMapping("/{hotelId}/menu/categories")
-    ResponseEntity<?> addCategory(@PathVariable ObjectId hotelId, @RequestBody Category category){
+    @PostMapping("/{username}/menu/categories")
+    ResponseEntity<?> addCategory(@PathVariable String username, @RequestBody Category category){
+        ObjectId hotelId=hotelService.findIdByEmail(username);
         hotelService.addCategory(hotelId,category);
         return ResponseEntity.ok("OK");
     }
-    @PostMapping("/{hotelId}/menu/categories/{categoryId}/items")
-    ResponseEntity<?> addItem(@PathVariable ObjectId hotelId,@PathVariable String categoryId,@RequestBody Item item){
+    @PostMapping("/{username}/menu/categories/{categoryId}/items")
+    ResponseEntity<?> addItem(@PathVariable String username,@PathVariable String categoryId,@RequestBody Item item){
+        ObjectId hotelId=hotelService.findIdByEmail(username);
         hotelService.addItem(hotelId,categoryId,item);
         return ResponseEntity.status(HttpStatus.CREATED).body("added Item");
     }
-    @GetMapping("/{hotelId}/menu/items")
-    public ResponseEntity<List<Item>> getAllItems(@PathVariable ObjectId hotelId){
+    @GetMapping("/{username}/menu/items")
+    public ResponseEntity<List<Item>> getAllItems(@PathVariable String username){
+        ObjectId hotelId=hotelService.findIdByEmail(username);
         List<Item> items=hotelService.getAllItems(hotelId);
         return ResponseEntity.ok(items);
     }

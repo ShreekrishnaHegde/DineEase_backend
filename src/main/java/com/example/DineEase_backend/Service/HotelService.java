@@ -21,6 +21,11 @@ public class HotelService {
     public void saveHotelOwner(Hotel hotel){
         hotelRepository.save(hotel);
     }
+    public ObjectId findIdByEmail(String email){
+        return hotelRepository.findByEmail(email)
+                .map(Hotel::getMongoId)
+                .orElseThrow(() -> new RuntimeException("Hotel not found with email: " + email));
+    }
     public Hotel addCategory(ObjectId hotelId, Category category){
         Hotel hotel= hotelRepository.findById(hotelId).orElseThrow(()->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not Found"));
@@ -59,6 +64,4 @@ public class HotelService {
         }
         return allItems;
     }
-
-
 }

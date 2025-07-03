@@ -38,11 +38,11 @@ public class HotelService {
         hotel.getMenu().getCategories().add(category);
         hotelRepository.save(hotel);
     }
-    public Hotel deleteCategory(ObjectId hotelId,String categoryId){
+    public void deleteCategory(ObjectId hotelId, String categoryId){
         Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()
                  ->new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not Found"));
         hotel.getMenu().getCategories().removeIf(cat -> cat.getCategoryId().equals(categoryId));
-        return hotelRepository.save(hotel);
+        hotelRepository.save(hotel);
     }
     public Hotel addItem(ObjectId hotelId, String categoryId, Item item){
         Hotel hotel=hotelRepository.findById(hotelId).orElseThrow(()->

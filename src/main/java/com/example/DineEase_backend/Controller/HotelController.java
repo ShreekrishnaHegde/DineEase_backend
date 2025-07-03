@@ -8,6 +8,7 @@ import com.example.DineEase_backend.Entity.Menu;
 import com.example.DineEase_backend.Service.HotelService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,13 @@ public class HotelController {
         ObjectId hotelId=hotelService.findIdByEmail(username);
         hotelService.addCategory(hotelId,category);
         return ResponseEntity.ok("OK");
+    }
+    //To delete a category
+    @DeleteMapping("/{username}/menu/category/{categoryId}")
+    ResponseEntity<?> deleteCategory(@PathVariable String username, @PathVariable String categoryId){
+        ObjectId hotelId = hotelService.findIdByEmail(username);
+        hotelService.deleteCategory(hotelId,categoryId);
+        return ResponseEntity.ok("Deleted Category");
     }
 
     @PostMapping("/{username}/menu/categories/{categoryId}/items")

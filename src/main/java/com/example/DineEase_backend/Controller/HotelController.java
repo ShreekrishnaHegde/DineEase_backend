@@ -64,6 +64,16 @@ public class HotelController {
         hotelService.deleteItem(hotelId,categoryId,itemId);
         return ResponseEntity.ok("Deleted an item");
     }
-
-
+    //To send userProfile
+    @GetMapping("/{username}/profile")
+    public Hotel getHotelProfile(@PathVariable String username) {
+        ObjectId hotelId=hotelService.findIdByEmail(username);
+        return hotelService.getHotel(hotelId);
+    }
+    //To update the profile
+    @PutMapping("/{username}/profile")
+    public Hotel updateHotelProfile(@PathVariable String username,@RequestBody Hotel hotel) {
+        ObjectId hotelId=hotelService.findIdByEmail(username);
+        return hotelService.updateByEmail(hotelId, hotel);
+    }
 }

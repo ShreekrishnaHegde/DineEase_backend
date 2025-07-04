@@ -20,5 +20,7 @@ public class Hotel {
     private String email;
     private String fullname;
     private String role;
+    private String hotelName;
+    private String address;
     private Menu menu=new Menu();
 }

@@ -73,6 +73,7 @@ public class HotelService {
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not found"));
         return hotel;
     }
+    //To update the profile of hotel user
     public Hotel updateByEmail(ObjectId hotelId, Hotel updatedHotel) {
         Hotel existing=hotelRepository.findById(hotelId).orElseThrow(()->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"Hotel Not found"));
@@ -80,6 +81,11 @@ public class HotelService {
         existing.setFullname(updatedHotel.getFullname());
         existing.setAddress(updatedHotel.getAddress());
         return hotelRepository.save(existing);
+    }
+
+    //For real time searching of hotel
+    public List<Hotel> searchHotels(String query){
+        return hotelRepository.findByHotelNameContainingIgnoreCase(query);
     }
 
 }

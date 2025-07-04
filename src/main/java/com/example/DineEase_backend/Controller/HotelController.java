@@ -76,4 +76,10 @@ public class HotelController {
         ObjectId hotelId=hotelService.findIdByEmail(username);
         return hotelService.updateByEmail(hotelId, hotel);
     }
+
+    //For real time searching
+    @GetMapping("/search")
+    public List<Hotel> searchHotel(@RequestParam String query){
+        return hotelService.searchHotels(query);
+    }
 }

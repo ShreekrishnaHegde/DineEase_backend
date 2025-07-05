@@ -15,8 +15,8 @@ import java.util.List;
 public class Order {
     @Id
     private String id;
-    private String hotelId;
-    private String customerName;
+    private String hotelUsername;
+    private String customerUsername;
     private List<OrderItem> items;
     private int totalAmount;
     private String status;

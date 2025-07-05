@@ -24,7 +24,7 @@ public class OrderController {
     }
     @GetMapping("/hotel/{email}")
     public ResponseEntity<List<Order>> getOrdersByHotelEmail(@PathVariable String email) {
-        List<Order> orders=orderService.getOrdersByHotelEmail(email);
+        List<Order> orders=orderService.getOrdersByHotelUsername(email);
         return ResponseEntity.ok(orders);
     }
 }

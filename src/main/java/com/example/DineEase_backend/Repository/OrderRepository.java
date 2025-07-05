@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends MongoRepository<Order, ObjectId> {
-    List<Order> findByHotelId(String hotelEmail);
+    List<Order> findByHotelUsername(String hotelUsername);
 }

@@ -15,7 +15,8 @@ public class OrderService {
     public void saveOrder(Order order){
         orderRepository.save(order);
     }
-    public List<Order> getOrdersByHotelEmail(String email){
-        return orderRepository.findByHotelId(email);
+    public List<Order> getOrdersByHotelUsername(String email) {
+        return orderRepository.findByHotelUsername(email);
     }
+
 }

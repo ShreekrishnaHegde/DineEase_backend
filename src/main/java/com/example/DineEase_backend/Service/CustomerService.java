@@ -17,6 +17,12 @@ public class CustomerService {
     public void saveCustomer(Customer customer){
         customerRepository.save(customer);
     }
+    //
+    public ObjectId findByIdEmail(String email){
+        return customerRepository.findByEmail(email).map(
+                Customer::getMongoId
+        ).orElseThrow(()->new RuntimeException(HttpStatus.NOT_FOUND+"Customer Not Found with email"));
+    }
     //To retrieve customer profile
     public Customer getCustomer(ObjectId customerId){
         Customer customer=customerRepository.findById(customerId).orElseThrow(()->

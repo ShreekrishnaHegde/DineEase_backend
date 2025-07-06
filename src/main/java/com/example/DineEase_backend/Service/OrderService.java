@@ -1,10 +1,6 @@
 package com.example.DineEase_backend.Service;
-
-import com.example.DineEase_backend.Entity.Customer;
 import com.example.DineEase_backend.Entity.Order;
-import com.example.DineEase_backend.Repository.HotelRepository;
 import com.example.DineEase_backend.Repository.OrderRepository;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

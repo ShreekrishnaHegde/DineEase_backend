@@ -21,5 +21,8 @@ public class OrderService {
         return orderRepository.findByHotelUsername(email);
     }
 
+    public List<Order> getOrdersByCustomerUsername(String customerUsername){
+        return orderRepository.findByCustomerUsername(customerUsername);
+    }
 
 }

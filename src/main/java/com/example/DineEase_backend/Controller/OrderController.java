@@ -27,4 +27,10 @@ public class OrderController {
         List<Order> orders=orderService.getOrdersByHotelUsername(email);
         return ResponseEntity.ok(orders);
     }
+    @GetMapping("customer/{username}")
+    public ResponseEntity<List<Order>> getOrderByCustomer(@PathVariable String username){
+        List<Order> orders=orderService.getOrdersByCustomerUsername(username);
+        return ResponseEntity.ok(orders);
+    }
+
 }

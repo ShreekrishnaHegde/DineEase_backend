@@ -16,6 +16,7 @@ public class Order {
     @Id
     private String id;
     private String hotelUsername;
+    private String hotelName;
     private String customerUsername;
     private List<OrderItem> items;
     private int totalAmount;

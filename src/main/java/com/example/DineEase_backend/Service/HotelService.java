@@ -87,5 +87,9 @@ public class HotelService {
     public List<Hotel> searchHotels(String query){
         return hotelRepository.findByHotelNameContainingIgnoreCase(query);
     }
+    public  String getHotelName(String hotelUserName){
+        return hotelRepository.findByEmail(hotelUserName).map(Hotel::getHotelName).orElseThrow(()->
+                new RuntimeException("Hotel Not Found"));
+    }
 
 }

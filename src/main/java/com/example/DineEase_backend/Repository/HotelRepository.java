@@ -14,4 +14,5 @@ public interface HotelRepository extends MongoRepository<Hotel, ObjectId> {
     Optional<Hotel> findByEmail(String email);
     List<Hotel> findByHotelNameContainingIgnoreCase(String hotelName);
 
+
 }
